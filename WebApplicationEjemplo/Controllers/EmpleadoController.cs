@@ -1,12 +1,7 @@
 ﻿using DataAccessLayer;
 using EntityLayer;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApplicationEjemplo.Models;
 
 namespace WebApplicationEjemplo.Controllers
 {
@@ -14,85 +9,61 @@ namespace WebApplicationEjemplo.Controllers
     [ApiController]
     public class EmpleadoController : ControllerBase
     {
-        [HttpGet]
-        public string Saludo()
+        private readonly RepositoryEmpleado repository;
+
+        public EmpleadoController(RepositoryEmpleado repository)
         {
-           
-            return $"hola mundo";
+            this.repository = repository;
         }
 
-        [HttpGet("saludodos")]
-        public string SaludoDos()
+        [HttpGet("{id}")]
+        public Empleado ObtenerEmpleado(int id)
         {
-            return "hola mundo dos";
-
-        }
-
-        [HttpGet("obtener-numero")]
-        public int ObtenerNumero()
-        {
-            return 1000000;
-        }
-
-        [HttpGet("obtener-empleado")]
-        public Empleado ObtenerEmpleado()
-        {
-            Empleado empleado = new Empleado();
-            empleado.Id = 1;
-            empleado.Nombre = "Jordan";
-            empleado.ApellidoPaterno = "Jamanca";
-            empleado.ApellidoMaterno = "De la Torre";
-            empleado.DNI = "45321655";
-            empleado.FechaNacimiento = DateTime.Today;
-
+            var empleado = repository.GetEmpleadoById(id);
             return empleado;
         }
 
-        [HttpGet("obtener-empleados")]
-        public List<Empleado> ObtenerEmpleados()
+        [HttpGet]
+        public ActionResult<List<Empleado>> ObtenerEmpleados()
         {
-            Empleado empleadoJordan = new Empleado();
-            empleadoJordan.Id = 1;
-            empleadoJordan.Nombre = "Jordan";
-            empleadoJordan.ApellidoPaterno = "Jamanca";
-            empleadoJordan.ApellidoMaterno = "De la Torre";
-            empleadoJordan.DNI = "45321655";
-            empleadoJordan.FechaNacimiento = DateTime.Today;
-
-            Empleado empleadoMarvin = new Empleado();
-            empleadoMarvin.Id = 2;
-            empleadoMarvin.Nombre = "Marvin";
-            empleadoMarvin.ApellidoPaterno = "Meza";
-            empleadoMarvin.ApellidoMaterno = "Odar";
-            empleadoMarvin.DNI = "45696485";
-            empleadoMarvin.FechaNacimiento = new DateTime(1989, 4, 30);
-
-            List<Empleado> listaEmpleados = new List<Empleado>();
-            listaEmpleados.Add(empleadoJordan);
-            listaEmpleados.Add(empleadoMarvin);
-
-            return listaEmpleados;
+            var empleados = repository.GetEmpleados();
+            return empleados;
         }
 
         [HttpPost]
-        public Empleado Create([FromBody] Empleado empleado)
+        public ActionResult<Empleado> Create([FromBody] Empleado empleado)
         {
-            var repositoryEmpleado = new RepositoryEmpleado();
-            repositoryEmpleado.Registrar(empleado);
-            return empleado;
+            var newempleado = repository.Registrar(empleado);
+            return CreatedAtAction(nameof(ObtenerEmpleado), new { id = newempleado.Id }, newempleado);
         }
 
         [HttpPut("{id}")]
-        public Empleado Update(int id, [FromBody] Empleado empleado)
+        public ActionResult<Empleado> Update(int id, [FromBody] Empleado empleado)
         {
-            empleado.Nombre = $"{empleado.Nombre} {empleado.Nombre}";
-            return empleado;
+            var empleadoExist = repository.GetEmpleadoById(id);
+            Empleado empleadoResponse = null;
+            if (empleadoExist == null)
+            {
+                return NotFound($"No existe un empleado con ID = {id}");
+            }
+            if (id == empleado.Id)
+            {
+                empleadoResponse = repository.Update(empleado);
+            }
+            return empleadoResponse;
         }
 
         [HttpDelete("{id}")]
-        public int Delete(int id)
+        public ActionResult Delete(int id)
         {
-            return id;
+            var empleado = repository.GetEmpleadoById(id);
+            if (empleado == null)
+            {
+                return NotFound($"No existe un empleado con ID = {id}");
+            }
+
+            repository.DeleteEmpleado(id);
+            return NoContent();
         }
 
 

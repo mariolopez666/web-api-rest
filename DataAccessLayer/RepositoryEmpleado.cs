@@ -1,4 +1,6 @@
-﻿using EntityLayer;
+﻿using AutoMapper;
+using DTO;
+using EntityLayer;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -10,12 +12,15 @@ namespace DataAccessLayer
     public class RepositoryEmpleado
     {
         private string cadenaConexion = null;
-        public RepositoryEmpleado(IConfiguration configuration)
+        private readonly IMapper mapper;
+        public RepositoryEmpleado(IConfiguration configuration, IMapper mapper)
         {
             cadenaConexion = configuration.GetConnectionString("DefaultConnection");
+            this.mapper = mapper;
         }
-        public Empleado Registrar(Empleado empleado)
+        public Empleado Registrar(EmpleadoDto empleadoDto)
         {
+            var empleado = mapper.Map<Empleado>(empleadoDto);
             using (var sqlConnection = new SqlConnection(cadenaConexion))
             {
                 var command = new SqlCommand("Insert_Empleado", sqlConnection);

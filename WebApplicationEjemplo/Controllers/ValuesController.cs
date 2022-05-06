@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using DTO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -29,9 +30,9 @@ namespace WebApplicationEjemplo.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
-        public IActionResult Post([FromForm] string value, [FromForm] IFormFile archivo)
+        public IActionResult Post([FromForm] ValueDto dto)
         {
-            return Ok(new { value = $"{value} {archivo.FileName} Peso: {archivo.Length}" });
+            return Ok(new { dto.Value, dto.Archivo.FileName, dto.Archivo.Length });
         }
 
         // PUT api/<ValuesController>/5

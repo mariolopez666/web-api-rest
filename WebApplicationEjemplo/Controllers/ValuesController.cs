@@ -30,9 +30,29 @@ namespace WebApplicationEjemplo.Controllers
 
         // POST api/<ValuesController>
         [HttpPost]
+        //Mensaje cuando supera los 128 MB: Se superó el límite de longitud del cuerpo multiparte 134217728
+        [DisableRequestSizeLimit]
+        //Mensaje cuando el body supera los 70 MB: No se pudo leer el formulario de solicitud. Solicitud de cuerpo demasiado grande.
+        //[RequestSizeLimit(73400320)] //hasta 128 MB en Linux
+        //[RequestSizeLimit(73400320)]
+        //Error al leer el formulario de solicitud. Se excedió el límite de longitud de cuerpo multiparte 157286400 (150mb)
+        //MultipartBodyLengthLimit es para cada valor del formData
+        //para que funcione se tiene que incluir el atributo DisableRequestSizeLimit para quitar el valor por defecto de 28mb
+        [RequestFormLimits(MultipartBodyLengthLimit = 157286400)]
         public IActionResult Post([FromForm] ValueDto dto)
         {
-            return Ok(new { dto.Value, dto.Archivo.FileName, dto.Archivo.Length });
+            if (dto.Archivo is null)
+            {
+                return BadRequest(new { value = "sin archivo" });
+            }
+            return Ok(new
+            {
+                dto.Value,
+                dto.Archivo.FileName,
+                dto.Archivo.Length,
+                KB = Math.Round(dto.Archivo.Length / 1024M, 2),
+                MB = dto.Archivo.Length / 1024M / 1024M
+            });
         }
 
         // PUT api/<ValuesController>/5

@@ -377,6 +377,9 @@
         "additionalProperties": false
       },
       "EmpleadoDto": {
+        "required": [
+          "dni"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -404,8 +407,8 @@
             "format": "date-time"
           },
           "dni": {
-            "type": "string",
-            "nullable": true
+            "pattern": "^\\d{8}$",
+            "type": "string"
           }
         },
         "additionalProperties": false,

@@ -75,16 +75,6 @@
               "schema": {
                 "$ref": "#/components/schemas/EmpleadoDto"
               }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/EmpleadoDto"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/EmpleadoDto"
-              }
             }
           }
         },
@@ -121,16 +111,6 @@
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Empleado"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Empleado"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/Empleado"
               }

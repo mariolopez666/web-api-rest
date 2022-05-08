@@ -99,6 +99,148 @@
         }
       }
     },
+    "/api/Empleado/registrar": {
+      "post": {
+        "tags": [
+          "Empleado"
+        ],
+        "summary": "Metodo para registrar un empleado.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "DNI"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "description": "Identificador del empleado",
+                    "format": "int32"
+                  },
+                  "Nombre": {
+                    "maxLength": 30,
+                    "minLength": 3,
+                    "pattern": "[a-zA-Z]",
+                    "type": "string",
+                    "description": "Nombre del Empleado.",
+                    "nullable": true
+                  },
+                  "ApellidoMaterno": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "ApellidoPaterno": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "FechaNacimiento": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "DNI": {
+                    "pattern": "^\\d{8}$",
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "Nombre": {
+                  "style": "form"
+                },
+                "ApellidoMaterno": {
+                  "style": "form"
+                },
+                "ApellidoPaterno": {
+                  "style": "form"
+                },
+                "FechaNacimiento": {
+                  "style": "form"
+                },
+                "DNI": {
+                  "style": "form"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "required": [
+                  "DNI"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "description": "Identificador del empleado",
+                    "format": "int32"
+                  },
+                  "Nombre": {
+                    "maxLength": 30,
+                    "minLength": 3,
+                    "pattern": "[a-zA-Z]",
+                    "type": "string",
+                    "description": "Nombre del Empleado.",
+                    "nullable": true
+                  },
+                  "ApellidoMaterno": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "ApellidoPaterno": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "FechaNacimiento": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "DNI": {
+                    "pattern": "^\\d{8}$",
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "Nombre": {
+                  "style": "form"
+                },
+                "ApellidoMaterno": {
+                  "style": "form"
+                },
+                "ApellidoPaterno": {
+                  "style": "form"
+                },
+                "FechaNacimiento": {
+                  "style": "form"
+                },
+                "DNI": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Empleado"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/Empleado/{id}": {
       "put": {
         "tags": [
@@ -390,6 +532,7 @@
           "nombre": {
             "maxLength": 30,
             "minLength": 3,
+            "pattern": "[a-zA-Z]",
             "type": "string",
             "description": "Nombre del Empleado.",
             "nullable": true

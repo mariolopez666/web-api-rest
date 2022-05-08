@@ -10,22 +10,27 @@
         "tags": [
           "Empleado"
         ],
+        "summary": "Obtener empleado por Identificador.",
         "parameters": [
           {
             "name": "traceId",
             "in": "path",
+            "description": "Identificador de traza.",
             "required": true,
             "schema": {
               "type": "string",
+              "description": "Identificador de traza.",
               "nullable": true
             }
           },
           {
             "name": "id",
             "in": "path",
+            "description": "Identificador del empleado.",
             "required": true,
             "schema": {
               "type": "integer",
+              "description": "Identificador del empleado.",
               "format": "int32"
             }
           }
@@ -69,7 +74,9 @@
         "tags": [
           "Empleado"
         ],
+        "summary": "Metodo para registrar un empleado.",
         "requestBody": {
+          "description": "Objeto empleado.",
           "content": {
             "application/json": {
               "schema": {
@@ -374,10 +381,14 @@
         "properties": {
           "id": {
             "type": "integer",
+            "description": "Identificador del empleado",
             "format": "int32"
           },
           "nombre": {
+            "maxLength": 30,
+            "minLength": 3,
             "type": "string",
+            "description": "Nombre del Empleado.",
             "nullable": true
           },
           "apellidoMaterno": {
@@ -397,7 +408,8 @@
             "nullable": true
           }
         },
-        "additionalProperties": false
+        "additionalProperties": false,
+        "description": "Objeto con los datos del empleado."
       }
     }
   }

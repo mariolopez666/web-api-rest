@@ -1,0 +1,3404 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Sharff.ApiRest",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/espejo/{traceId}": {
+      "get": {
+        "tags": [
+          "CabEspejo"
+        ],
+        "summary": "Método para obtener el listado de Comprobantes Espejo.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProductoTipoDocId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ProductoId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumComprobante",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Numero",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Serie",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "EstadoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Listado de Comprobantes Espejo"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CabEspejo"
+        ],
+        "summary": "Método para registrar un Comprobante Espejo con documentos adjuntos.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Empresa",
+                  "EmpresaId",
+                  "Numero",
+                  "Serie",
+                  "Sucursal",
+                  "SucursalId",
+                  "TipoDoc",
+                  "TipoDocId"
+                ],
+                "type": "object",
+                "properties": {
+                  "CabCompInterId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "EmpresaId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Empresa": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "SucursalId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Sucursal": {
+                    "maxLength": 100,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Fecha": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "MonedaId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "MontoTipoCambio": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "TipoDocId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "TipoDoc": {
+                    "maxLength": 50,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Serie": {
+                    "maxLength": 4,
+                    "minLength": 4,
+                    "pattern": "^[FEB][A-Z0-9]{1,3}$",
+                    "type": "string"
+                  },
+                  "Numero": {
+                    "maxLength": 8,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "Descripcion": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "MontoNeto": {
+                    "type": "number",
+                    "format": "double",
+                    "nullable": true
+                  },
+                  "MontoImpuesto": {
+                    "type": "number",
+                    "format": "double",
+                    "nullable": true
+                  },
+                  "UsuarioCreaId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "IpCreacion": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Adjuntos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "nullable": true
+                  },
+                  "DetEspejos": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PostDetEspejoDto"
+                    },
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "CabCompInterId": {
+                  "style": "form"
+                },
+                "EmpresaId": {
+                  "style": "form"
+                },
+                "Empresa": {
+                  "style": "form"
+                },
+                "SucursalId": {
+                  "style": "form"
+                },
+                "Sucursal": {
+                  "style": "form"
+                },
+                "Fecha": {
+                  "style": "form"
+                },
+                "MonedaId": {
+                  "style": "form"
+                },
+                "MontoTipoCambio": {
+                  "style": "form"
+                },
+                "TipoDocId": {
+                  "style": "form"
+                },
+                "TipoDoc": {
+                  "style": "form"
+                },
+                "Serie": {
+                  "style": "form"
+                },
+                "Numero": {
+                  "style": "form"
+                },
+                "Descripcion": {
+                  "style": "form"
+                },
+                "MontoNeto": {
+                  "style": "form"
+                },
+                "MontoImpuesto": {
+                  "style": "form"
+                },
+                "UsuarioCreaId": {
+                  "style": "form"
+                },
+                "IpCreacion": {
+                  "style": "form"
+                },
+                "Adjuntos": {
+                  "style": "form"
+                },
+                "DetEspejos": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/espejo/{traceId}/{id}": {
+      "get": {
+        "tags": [
+          "CabEspejo"
+        ],
+        "summary": "Método para obtener un Comprobante Espejo por Id.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Entidad Comprobante Espejo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[Scharff.Facturacion.Domain.Model.Dtos.CabEspejoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CabEspejo"
+        ],
+        "summary": "Método para modificar un Comprobante Espejo con documentos adjuntos.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PutCabEspejoDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PutCabEspejoDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PutCabEspejoDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PutCabEspejoDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/espejo/anular/{traceId}/{id}": {
+      "delete": {
+        "tags": [
+          "CabEspejo"
+        ],
+        "summary": "Método para anular un Comprobante Espejo por Id.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/espejo/adjunto/{traceId}/{id}": {
+      "delete": {
+        "tags": [
+          "CabEspejo"
+        ],
+        "summary": "Método para eliminar un documento adjunto del Comprobante Espejo.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/espejo/excel/{traceId}": {
+      "get": {
+        "tags": [
+          "CabEspejo"
+        ],
+        "summary": "Método para descargar un archivo Excel con el listado de Comprobantes Espejo.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProductoTipoDocId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ProductoId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "NumComprobante",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Numero",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Serie",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "EstadoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Archivo Excel de Comprobantes Espejo",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comp-inter/{traceId}": {
+      "get": {
+        "tags": [
+          "CompInter"
+        ],
+        "summary": "Método para obtener el listado de Comprobantes Internacionales.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "Numero",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProductoId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ProductoTipoDocId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ProductoTipoServId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "EstadoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProveedorId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Listado de Comprobantes Internacionales",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.CabCompInterDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "CompInter"
+        ],
+        "summary": "Método para registrar un Comprobante Internacional con documentos adjuntos.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "DetCompInters"
+                ],
+                "type": "object",
+                "properties": {
+                  "ProductoId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ProductoTipoDocId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ProductoTipoServId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Fecha": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Descripcion": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Monto": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "UsuarioCreaId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IpCreacion": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Adjuntos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "nullable": true
+                  },
+                  "DetCompInters": {
+                    "maxItems": 70,
+                    "minItems": 1,
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PostDetCompInterDto"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "ProductoId": {
+                  "style": "form"
+                },
+                "ProductoTipoDocId": {
+                  "style": "form"
+                },
+                "ProductoTipoServId": {
+                  "style": "form"
+                },
+                "Fecha": {
+                  "style": "form"
+                },
+                "Descripcion": {
+                  "style": "form"
+                },
+                "Monto": {
+                  "style": "form"
+                },
+                "UsuarioCreaId": {
+                  "style": "form"
+                },
+                "IpCreacion": {
+                  "style": "form"
+                },
+                "Adjuntos": {
+                  "style": "form"
+                },
+                "DetCompInters": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comp-inter/{traceId}/{id}": {
+      "get": {
+        "tags": [
+          "CompInter"
+        ],
+        "summary": "Método para obtener un Comprobante Internacional por Id.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Entidad Comprobante Internacional",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[Scharff.Facturacion.Domain.Model.Dtos.CabCompInterDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "CompInter"
+        ],
+        "summary": "Método para modificar un Comprobante Internacional con documentos adjuntos.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PutCompInterDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PutCompInterDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PutCompInterDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.PutCompInterDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comp-inter/anular/{traceId}/{id}": {
+      "delete": {
+        "tags": [
+          "CompInter"
+        ],
+        "summary": "Método para anular un Comprobante Internacional por Id.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comp-inter/adjunto/{traceId}/{id}": {
+      "delete": {
+        "tags": [
+          "CompInter"
+        ],
+        "summary": "Método para eliminar un documento adjunto del Comprobante Internacional.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/comp-inter/pdf/{traceId}/{id}": {
+      "get": {
+        "tags": [
+          "CompInter"
+        ],
+        "summary": "Método para obtener un Comprobante Internacional en PDF por Id.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Comprobante Internacional en PDF",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/pdf": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/correlativo/{traceId}": {
+      "get": {
+        "tags": [
+          "Correlativo"
+        ],
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "TipoDocId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Serie",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/estado/{traceId}": {
+      "get": {
+        "tags": [
+          "Estado"
+        ],
+        "summary": "Método para obtener el listado de Estados.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Lista de Estados",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.EstadoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/guia-cargo/{traceId}": {
+      "get": {
+        "tags": [
+          "GuiaCargo"
+        ],
+        "summary": "Método para obtener el listado de Cargos.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProductoId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ProductoTipoDocId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ProductoTipoServId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "EstadoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProveedorId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Lista de Cargos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.GuiaCargoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "GuiaCargo"
+        ],
+        "summary": "Método para registrar un Cargo con documentos adjuntos.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Descripcion",
+                  "NombreProveedor",
+                  "NumeroDocumento",
+                  "NumeroGuiaAerea",
+                  "SerieDocumento",
+                  "TipoDoc"
+                ],
+                "type": "object",
+                "properties": {
+                  "ProductoId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Fecha": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "Importe": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Descripcion": {
+                    "type": "string"
+                  },
+                  "ProductoTipoDocId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ProductoTipoServsId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "TipoDocId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "TipoDoc": {
+                    "type": "string"
+                  },
+                  "SerieDocumento": {
+                    "maxLength": 4,
+                    "minLength": 4,
+                    "pattern": "^(F[A-Z0-9]{1,3}|E[0-9]{3})$",
+                    "type": "string"
+                  },
+                  "NumeroDocumento": {
+                    "maxLength": 8,
+                    "minLength": 0,
+                    "pattern": "^[1-9]([0-9]{1,7})?$",
+                    "type": "string"
+                  },
+                  "NumeroGuiaAerea": {
+                    "maxLength": 20,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "ProveedorId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "NombreProveedor": {
+                    "type": "string"
+                  },
+                  "Origen": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsuarioCreaId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IpCreacion": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Adjuntos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "ProductoId": {
+                  "style": "form"
+                },
+                "Fecha": {
+                  "style": "form"
+                },
+                "Importe": {
+                  "style": "form"
+                },
+                "Descripcion": {
+                  "style": "form"
+                },
+                "ProductoTipoDocId": {
+                  "style": "form"
+                },
+                "ProductoTipoServsId": {
+                  "style": "form"
+                },
+                "TipoDocId": {
+                  "style": "form"
+                },
+                "TipoDoc": {
+                  "style": "form"
+                },
+                "SerieDocumento": {
+                  "style": "form"
+                },
+                "NumeroDocumento": {
+                  "style": "form"
+                },
+                "NumeroGuiaAerea": {
+                  "style": "form"
+                },
+                "ProveedorId": {
+                  "style": "form"
+                },
+                "NombreProveedor": {
+                  "style": "form"
+                },
+                "Origen": {
+                  "style": "form"
+                },
+                "UsuarioCreaId": {
+                  "style": "form"
+                },
+                "IpCreacion": {
+                  "style": "form"
+                },
+                "Adjuntos": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/guia-cargo/{traceId}/{id}": {
+      "get": {
+        "tags": [
+          "GuiaCargo"
+        ],
+        "summary": "Método para obtener un Cargo por Id.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Entidad Cargo",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[Scharff.Facturacion.Domain.Model.Dtos.GuiaCargoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "GuiaCargo"
+        ],
+        "summary": "Método para modificar un Cargo con documentos adjuntos.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "Descripcion",
+                  "NombreProveedor",
+                  "NumeroDocumento",
+                  "NumeroGuiaAerea",
+                  "SerieDocumento"
+                ],
+                "type": "object",
+                "properties": {
+                  "Id": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ProductoId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "Fecha": {
+                    "type": "string",
+                    "format": "date-time",
+                    "nullable": true
+                  },
+                  "Importe": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "Descripcion": {
+                    "type": "string"
+                  },
+                  "ProductoTipoDocId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ProductoTipoServsId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "TipoDocId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "TipoDoc": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "SerieDocumento": {
+                    "maxLength": 4,
+                    "minLength": 4,
+                    "pattern": "^(F[A-Z0-9]{1,3}|E[0-9]{3})$",
+                    "type": "string"
+                  },
+                  "NumeroDocumento": {
+                    "maxLength": 20,
+                    "minLength": 0,
+                    "pattern": "^[1-9]([0-9]{1,7})?$",
+                    "type": "string"
+                  },
+                  "NumeroGuiaAerea": {
+                    "maxLength": 20,
+                    "minLength": 0,
+                    "type": "string"
+                  },
+                  "ProveedorId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "NombreProveedor": {
+                    "type": "string"
+                  },
+                  "Origen": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "UsuarioModiId": {
+                    "type": "integer",
+                    "format": "int32",
+                    "nullable": true
+                  },
+                  "IpModificacion": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Adjuntos": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    },
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "Id": {
+                  "style": "form"
+                },
+                "ProductoId": {
+                  "style": "form"
+                },
+                "Fecha": {
+                  "style": "form"
+                },
+                "Importe": {
+                  "style": "form"
+                },
+                "Descripcion": {
+                  "style": "form"
+                },
+                "ProductoTipoDocId": {
+                  "style": "form"
+                },
+                "ProductoTipoServsId": {
+                  "style": "form"
+                },
+                "TipoDocId": {
+                  "style": "form"
+                },
+                "TipoDoc": {
+                  "style": "form"
+                },
+                "SerieDocumento": {
+                  "style": "form"
+                },
+                "NumeroDocumento": {
+                  "style": "form"
+                },
+                "NumeroGuiaAerea": {
+                  "style": "form"
+                },
+                "ProveedorId": {
+                  "style": "form"
+                },
+                "NombreProveedor": {
+                  "style": "form"
+                },
+                "Origen": {
+                  "style": "form"
+                },
+                "UsuarioModiId": {
+                  "style": "form"
+                },
+                "IpModificacion": {
+                  "style": "form"
+                },
+                "Adjuntos": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/guia-cargo/anular/{traceId}/{id}": {
+      "delete": {
+        "tags": [
+          "GuiaCargo"
+        ],
+        "summary": "Método para anular un Cargo por Id.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/guia-cargo/adjunto/{traceId}/{id}": {
+      "delete": {
+        "tags": [
+          "GuiaCargo"
+        ],
+        "summary": "Método para eliminar un documento adjunto del Cargo.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/guia-cargo/excel/{traceId}": {
+      "get": {
+        "tags": [
+          "GuiaCargo"
+        ],
+        "summary": "Método para descargar un archivo Excel con el listado de Cargos.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProductoId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ProductoTipoDocId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "ProductoTipoServId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "FechaDesde",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "FechaHasta",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time",
+              "nullable": true
+            }
+          },
+          {
+            "name": "EstadoId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          },
+          {
+            "name": "ProveedorId",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Archivo Excel de Cargos",
+            "content": {
+              "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/guia-cargo/importar/{traceId}": {
+      "post": {
+        "tags": [
+          "GuiaCargo"
+        ],
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "ProductoId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ProductoTipoDocId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ProductoTipoServsId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "ProveedorId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "NombreProveedor": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "UsuarioCreaId": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "IpCreacion": {
+                    "type": "string",
+                    "nullable": true
+                  },
+                  "Excel": {
+                    "type": "string",
+                    "format": "binary",
+                    "nullable": true
+                  }
+                }
+              },
+              "encoding": {
+                "ProductoId": {
+                  "style": "form"
+                },
+                "ProductoTipoDocId": {
+                  "style": "form"
+                },
+                "ProductoTipoServsId": {
+                  "style": "form"
+                },
+                "ProveedorId": {
+                  "style": "form"
+                },
+                "NombreProveedor": {
+                  "style": "form"
+                },
+                "UsuarioCreaId": {
+                  "style": "form"
+                },
+                "IpCreacion": {
+                  "style": "form"
+                },
+                "Excel": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/log": {
+      "post": {
+        "tags": [
+          "Log"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.FilterLogDto"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.FilterLogDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.FilterLogDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.FilterLogDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/api/producto/{traceId}": {
+      "get": {
+        "tags": [
+          "Producto"
+        ],
+        "summary": "Método para obtener el listado de Productos.",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Lista de Productos",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.ProductoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/producto-tipo-doc/{traceId}/id/{productoId}": {
+      "get": {
+        "tags": [
+          "ProductoTipoDoc"
+        ],
+        "summary": "Método para obtener el listado de Productos(Tipo Documento).",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "productoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Lista de Productos(Tipo Documento)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoDocDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/producto-tipo-serv/{traceId}/id/{productoTipoDocId}": {
+      "get": {
+        "tags": [
+          "ProductoTipoServ"
+        ],
+        "summary": "Método para obtener el listado de Productos(Tipo Servicio).",
+        "parameters": [
+          {
+            "name": "traceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          {
+            "name": "productoTipoDocId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Lista de Productos(Tipo Servicio)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoServDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Scharff.Facturacion.Domain.Model.Dtos.PostDetEspejoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cabEspejoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detCompInterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cuenta": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioCreaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.TraceDto": {
+        "type": "object",
+        "properties": {
+          "traceId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "System.Net.HttpStatusCode": {
+        "enum": [
+          100,
+          101,
+          102,
+          103,
+          200,
+          201,
+          202,
+          203,
+          204,
+          205,
+          206,
+          207,
+          208,
+          226,
+          300,
+          301,
+          302,
+          303,
+          304,
+          305,
+          306,
+          307,
+          308,
+          400,
+          401,
+          402,
+          403,
+          404,
+          405,
+          406,
+          407,
+          408,
+          409,
+          410,
+          411,
+          412,
+          413,
+          414,
+          415,
+          416,
+          417,
+          421,
+          422,
+          423,
+          424,
+          426,
+          428,
+          429,
+          431,
+          451,
+          500,
+          501,
+          502,
+          503,
+          504,
+          505,
+          506,
+          507,
+          508,
+          510,
+          511
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "Scharff.Shared.ApiRest.Models.StatusDto": {
+        "type": "object",
+        "properties": {
+          "httpCode": {
+            "$ref": "#/components/schemas/System.Net.HttpStatusCode"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Boolean, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.EstadoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.ProductoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "proceso": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoDocDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoServDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.CabCompInterAdjDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cabCompInterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomArchAdj": {
+            "type": "string",
+            "nullable": true
+          },
+          "noRutaAdj": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.DetCompInterDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cabCompInterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "guiaCargoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usuarioCreaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.CabCompInterDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "numero": {
+            "type": "string",
+            "nullable": true
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoTipoDocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoTipoServId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "monto": {
+            "type": "number",
+            "format": "double"
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usuarioCreaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipCreacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioModiId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipModificacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.EstadoDto"
+          },
+          "producto": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.ProductoDto"
+          },
+          "productoTipoDoc": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoDocDto"
+          },
+          "productoTipoServ": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoServDto"
+          },
+          "cabCompInterAdjs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.CabCompInterAdjDto"
+            },
+            "nullable": true
+          },
+          "detCompInters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.DetCompInterDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.CabEspejoAdjDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cabEspejoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomArchadj": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomRutaAdj": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.DetEspejoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cabEspejoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "detCompInterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cuenta": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioCreaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.CabEspejoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cabCompInterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empresaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empresa": {
+            "type": "string",
+            "nullable": true
+          },
+          "sucursalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sucursal": {
+            "type": "string",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "monedaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "montoTipoCambio": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tipoDocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoDoc": {
+            "type": "string",
+            "nullable": true
+          },
+          "serie": {
+            "type": "string",
+            "nullable": true
+          },
+          "numero": {
+            "type": "string",
+            "nullable": true
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "montoNeto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoImpuesto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "cabCompInter": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.CabCompInterDto"
+          },
+          "estado": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.EstadoDto"
+          },
+          "cabEspejoAdjs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.CabEspejoAdjDto"
+            },
+            "nullable": true
+          },
+          "detEspejos": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.DetEspejoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[Scharff.Facturacion.Domain.Model.Dtos.CabEspejoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.CabEspejoDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Object, System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.PutCabEspejoDto": {
+        "required": [
+          "empresa",
+          "empresaId",
+          "numero",
+          "serie",
+          "sucursal",
+          "sucursalId",
+          "tipoDoc",
+          "tipoDocId"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "cabCompInterId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empresaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "empresa": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "sucursalId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sucursal": {
+            "maxLength": 100,
+            "minLength": 0,
+            "type": "string"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "monedaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "montoTipoCambio": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "tipoDocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "tipoDoc": {
+            "maxLength": 50,
+            "minLength": 0,
+            "type": "string"
+          },
+          "serie": {
+            "maxLength": 4,
+            "minLength": 4,
+            "type": "string"
+          },
+          "numero": {
+            "maxLength": 8,
+            "minLength": 0,
+            "type": "string"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "montoNeto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "montoImpuesto": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "usuarioModiId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ipModificacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "adjuntos": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.CabCompInterDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.CabCompInterDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.PostDetCompInterDto": {
+        "type": "object",
+        "properties": {
+          "guiaCargoId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[Scharff.Facturacion.Domain.Model.Dtos.CabCompInterDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.CabCompInterDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.PutCompInterDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoTipoDocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoTipoServId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "monto": {
+            "type": "number",
+            "format": "double"
+          },
+          "vigente": {
+            "type": "boolean",
+            "nullable": true
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "numero": {
+            "type": "string",
+            "nullable": true
+          },
+          "clienteId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entiCobraId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "usuarioModiId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ipModificacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "adjuntos": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.EstadoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.EstadoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.GuiaCargoAdjDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "guiaCargoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nomArchivoAdj": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomRutaAdj": {
+            "type": "string",
+            "nullable": true
+          },
+          "vigente": {
+            "type": "boolean"
+          },
+          "usuarioCreaId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipCreacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioModiId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipModificacion": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Facturacion.Domain.Model.Dtos.GuiaCargoDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fecha": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "importe": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
+          "descripcion": {
+            "type": "string",
+            "nullable": true
+          },
+          "estadoId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoTipoDocId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "productoTipoServsId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "serieDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroDocumento": {
+            "type": "string",
+            "nullable": true
+          },
+          "numeroGuiaAerea": {
+            "type": "string",
+            "nullable": true
+          },
+          "proveedorId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "nombreProveedor": {
+            "type": "string",
+            "nullable": true
+          },
+          "origen": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "usuarioCreaId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fechaCreacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipCreacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "usuarioModiId": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "fechaModificacion": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ipModificacion": {
+            "type": "string",
+            "nullable": true
+          },
+          "estado": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.EstadoDto"
+          },
+          "producto": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.ProductoDto"
+          },
+          "productoTipoDoc": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoDocDto"
+          },
+          "productoTipoServs": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoServDto"
+          },
+          "guiaCargoAdjs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.GuiaCargoAdjDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.GuiaCargoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.GuiaCargoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[Scharff.Facturacion.Domain.Model.Dtos.GuiaCargoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.GuiaCargoDto"
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.FilterLogDto": {
+        "type": "object",
+        "properties": {
+          "level": {
+            "type": "string",
+            "nullable": true
+          },
+          "start_day": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "end_day": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "traceId": {
+            "type": "string",
+            "nullable": true
+          },
+          "exception": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.ProductoDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.ProductoDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoDocDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoDocDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "Scharff.Shared.ApiRest.Models.ResultDto`1[[System.Collections.Generic.List`1[[Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoServDto, Scharff.Facturacion.Domain.Model, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=5.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]": {
+        "type": "object",
+        "properties": {
+          "trace": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.TraceDto"
+          },
+          "status": {
+            "$ref": "#/components/schemas/Scharff.Shared.ApiRest.Models.StatusDto"
+          },
+          "payload": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Scharff.Facturacion.Domain.Model.Dtos.ProductoTipoServDto"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "JWT Authorization header using the Bearer scheme (Example: 'Bearer 12345abcdef')",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

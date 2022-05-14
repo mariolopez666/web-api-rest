@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DTO</name>
+    </assembly>
+    <members>
+        <member name="T:DTO.EmpleadoDto">
+            <summary>
+            Objeto con los datos del empleado.
+            </summary>
+        </member>
+        <member name="P:DTO.EmpleadoDto.Id">
+            <summary>
+            Identificador del empleado
+            </summary>
+        </member>
+        <member name="P:DTO.EmpleadoDto.Nombre">
+            <summary>
+            Nombre del Empleado.
+            </summary>
+        </member>
+    </members>
+</doc>

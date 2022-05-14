@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>WebApplicationEjemplo</name>
+    </assembly>
+    <members>
+        <member name="M:WebApplicationEjemplo.Controllers.EmpleadoController.ObtenerEmpleado(System.Int32)">
+            <summary>
+            Obtener empleado por Identificador.
+            </summary>
+            <param name="id">Identificador del empleado.</param>
+        </member>
+        <member name="M:WebApplicationEjemplo.Controllers.EmpleadoController.Create(DTO.EmpleadoDto)">
+            <summary>
+            Metodo para registrar un empleado.
+            </summary>
+            <param name="empleadoDto">Objeto empleado.</param>
+            <returns></returns>
+        </member>
+        <member name="M:WebApplicationEjemplo.Controllers.EmpleadoController.CreateFromForm(DTO.EmpleadoDto)">
+            <summary>
+            Metodo para registrar un empleado.
+            </summary>
+            <param name="empleadoDto">Objeto empleado.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -41,6 +41,7 @@ namespace WebApplicationEjemplo.Controllers
         [RequestFormLimits(MultipartBodyLengthLimit = 157286400)]
         public IActionResult Post([FromForm] ValueDto dto)
         {
+            var files = Request.Form.Files;
             if (dto.Archivo is null)
             {
                 return BadRequest(new { value = "sin archivo" });

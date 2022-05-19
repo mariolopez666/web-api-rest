@@ -24,5 +24,10 @@
             <param name="empleadoDto">Objeto empleado.</param>
             <returns></returns>
         </member>
+        <member name="P:WebApplicationEjemplo.Filters.ValidateAuthorizationRequestAttribute.Roles">
+            <summary>
+            Obtiene o establece una lista delimitada por comas de roles que pueden acceder al recurso.
+            </summary>
+        </member>
     </members>
 </doc>

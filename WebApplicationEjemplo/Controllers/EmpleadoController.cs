@@ -2,10 +2,12 @@
 using DataAccessLayer;
 using DTO;
 using EntityLayer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using WebApplicationEjemplo.Filters;
 
 namespace WebApplicationEjemplo.Controllers
 {
@@ -42,8 +44,12 @@ namespace WebApplicationEjemplo.Controllers
         }
 
         [HttpGet]
+        [ValidateAuthorizationRequest(Roles = "courier-facturadorrr")]
+        //[Authorize(Roles = "asdf")]
         public ActionResult<List<EmpleadoDto>> ObtenerEmpleados()
         {
+            var headers = HttpContext.Request.Headers;
+            var queryString = HttpContext.Request.Query;
             var empleados = mapper.Map<List<EmpleadoDto>>(repository.GetEmpleados()) ;
             return empleados;
         }

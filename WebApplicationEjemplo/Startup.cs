@@ -46,6 +46,9 @@ namespace WebApplicationEjemplo
             });
 
             services.AddAutoMapper(typeof(EmpleadoProfile));
+
+            services.AddCors(opciones => opciones.AddPolicy("mipolitica", 
+                             opciones => opciones.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -65,6 +68,8 @@ namespace WebApplicationEjemplo
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors("mipolitica");
 
             app.UseEndpoints(endpoints =>
             {
